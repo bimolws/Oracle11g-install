@@ -1,4 +1,5 @@
-#--- * * * Install oracle 11G R2 11.2.0.3 Centos 7* * * ---
+
+# --- * * * Install oracle 11G R2 11.2.0.3 Centos 7* * * ---
 
 1. Download Oracle 11g R2 11.2.0.3:
 
@@ -20,12 +21,12 @@ For example.
 	127.0.0.1       localhost.localdomain  localhost
 	10.84.70.152  stag-app01
 
-##Oracle Installation Prerequisites
-###Automatic Setup
+## Oracle Installation Prerequisites
+### Automatic Setup
 --  install all the necessary prerequisites automatically then edit  /etc/sysctl.conf và /etc/security/limit.conf
 	yum install -y oracle-rdbms-server-11gR2-preinstall
 
-###Manual Setup
+### Manual Setup
 
 	vi /etc/sysctl.conf
 add :
@@ -76,6 +77,11 @@ Add line to file "/etc/security/limits.conf":
 	yum install -y numactl-devel-2*x86_64*
 	yum install -y sysstat-9*x86_64*
 	yum install -y compat-libcap*
+
+	check 
+	rpm -q --qf '%{NAME}-%{VERSION}-%{RELEASE}(%{ARCH})\n' binutils \ elfutils-libelf \ elfutils-libelf-devel \ gcc \ gcc-c++ \ glibc \ glibc-common \ glibc-devel \ glibc-headers \ ksh \ libaio \ libaio-devel \ libgcc \ libstdc++ \ libstdc++-devel \ make \ sysstat \ unixODBC \ unixODBC-devel 
+
+	yum install binutils -y yum install compat-libcap1 -y yum install compat-libstdc++-33 -y yum install compat-libstdc++-33.i686 -y yum install gcc -y yum install gcc-c++ -y yum install glibc -y yum install glibc.i686 -y yum install glibc-devel -y yum install glibc-devel.i686 -y yum install ksh -y yum install libgcc -y yum install libgcc.i686 -y yum install libstdc++ -y yum install libstdc++.i686 -y yum install libstdc++-devel -y yum install libstdc++-devel.i686 -y yum install libaio -y yum install libaio.i686 -y yum install libaio-devel -y yum install libaio-devel.i686 -y yum install libXext -y yum install libXext.i686 -y yum install libXtst -y yum install libXtst.i686 -y yum install libX11 -y yum install libX11.i686 -y yum install libXau -y yum install libXau.i686 -y yum install libxcb -y yum install libxcb.i686 -y yum install libXi -y yum install libXi.i686 -y yum install make -y yum install sysstat -y yum install unixODBC -y yum install unixODBC-devel -y now, i installed all packages 
 
 -- Add group and user:
 
@@ -141,13 +147,14 @@ Set password user oracle:
  ++ On server install Oracle db:
 	yum install -y xorg-x11-app*
 	yum install -y xorg-x11-server-utils
+	yum install -y xorg-x11-xauth xorg-x11-fonts-* xorg-x11-utils xterm
 
 	export DISPLAY=:0.0
  	xhost +
-
+Note: run XLaunch before then start putty
 
 3. Install:
-
+yum install -y unzip
 -- unzip file:
 
 	#11.2.0.3
@@ -204,7 +211,11 @@ CV_ASSUME_DISTID=OEL6
 From <https://community.oracle.com/thread/2189824> 
 
 
-
+*** Resolve Error in invoking target ‘agent_nmhs’ of makefile ins_emagent.mk***
+ vi /u01/app/oracle/product/11.2.0/dbhome_1/sysman/lib/ins_emagent.mk
+...
+comment #$(MK_EMAGENT_NMECTL)
+add to       $(MK_EMAGENT_NMECTL) -lnnz11
 
 
 
