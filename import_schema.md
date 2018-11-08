@@ -1,5 +1,5 @@
 # Import Database Oracle
-
+`
 1. Create dump dir:
 mkdir -p /u01/app/oracle/backup/export
 chown -R oracle:oinstall /u01/app/oracle/backup/export
@@ -32,9 +32,6 @@ CREATE ROLE OLAPI_TRACE_USER NOT IDENTIFIED;
 GRANT OLAPI_TRACE_USER TO mradio;
 CREATE ROLE SELECT_DATA NOT IDENTIFIED;
 GRANT SELECT_DATA TO mradio;
-
-DROP USER devzoota CASCADE;
-
 
 **Error Import **
 [oracle@stag-app01 ~]$ impdp userid=system/Oracle123 schemas=mradio directory=dump_dir DUMPFILE=20181102_mradio.dmp LOGFILE=mradio.log
@@ -88,4 +85,4 @@ PASSWORD_REUSE_MAX DEFAULT
 PASSWORD_LOCK_TIME DEFAULT
 PASSWORD_GRACE_TIME DEFAULT
 PASSWORD_VERIFY_FUNCTION DEFAULT;
-  
+`
