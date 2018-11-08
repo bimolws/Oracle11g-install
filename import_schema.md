@@ -1,13 +1,18 @@
 # Import Database Oracle
-`
+
 1. Create dump dir:
 mkdir -p /u01/app/oracle/backup/export
+
 chown -R oracle:oinstall /u01/app/oracle/backup/export
+
 SQL> CREATE directory dump_dir AS '/u01/app/oracle/backup/export';
+
 SQL> grant write, read on directory dump_dir to system;
 
 2. Create table space
+
 mkdir -p /u01/app/oracle/oradata/mradio/
+
 chown -R oracle:oinstall /u01/app/oracle/oradata/mradio/
 
 CREATE TABLESPACE wala DATAFILE 
@@ -85,4 +90,3 @@ PASSWORD_REUSE_MAX DEFAULT
 PASSWORD_LOCK_TIME DEFAULT
 PASSWORD_GRACE_TIME DEFAULT
 PASSWORD_VERIFY_FUNCTION DEFAULT;
-`
