@@ -25,12 +25,17 @@ SEGMENT SPACE MANAGEMENT AUTO
 FLASHBACK ON; 
 
 3. Create user
+
 create user mradio identified by devmradio123;
+
 GRANT CONNECT, RESOURCE, DBA TO mradio;
+
 GRANT UNLIMITED TABLESPACE TO mradio;
 
 Change a user's password in Oracle
+
 ALTER USER system IDENTIFIED BY Oracle123;
+
 impdp userid=system/Oracle123 schemas=mradio directory=dump_dir DUMPFILE=20181102_mradio.dmp LOGFILE=mradio.log
 
 CREATE ROLE OLAPI_TRACE_USER NOT IDENTIFIED;
