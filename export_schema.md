@@ -1,13 +1,15 @@
+# Export Database oracle 
+
+1. Goto database 
+```
+su - oracle 
 [oracle@db opt2]$ echo $ORACLE_SID
 mradio
-[oracle@db opt2]$ d
--bash: d: command not found
 [oracle@db opt2]$ sqlplus  / as sysdba
 
 SQL*Plus: Release 11.2.0.1.0 Production on Fri Nov 2 09:12:40 2018
 
 Copyright (c) 1982, 2009, Oracle.  All rights reserved.
-
 
 Connected to:
 Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
@@ -36,9 +38,19 @@ Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
 
 Username: / as sysdba
 
-Cai   dat 
+Install Oracle
 http://dbaora.com/install-oracle-11g-release-2-11-2-on-centos-linux-7/
 https://oracle-base.com/articles/11g/oracle-db-11gr2-installation-on-oracle-linux-7
 
 change password user Oracle
 ALTER USER user_name IDENTIFIED BY new_password;
+
+Datafiles Data Dictionary Views
+SELECT NAME,
+    FILE#,
+    STATUS,
+    CHECKPOINT_CHANGE# "CHECKPOINT"   
+  FROM   V$DATAFILE;
+Or 
+select name from v$datafile;
+```
