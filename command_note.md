@@ -21,6 +21,10 @@ ORA-01688: unable to extend table MRADIO.MYSUBREGISTERTRAN partition SYS_P701 by
 
 fix:
 alter tablespace USERS add datafile '/data/users02.dbf' size 10m autoextend on;
+
+or 
+
+ALTER TABLESPACE VASGATE ADD DATAFILE '/data/vasgate02.dbf' SIZE 1024M REUSE AUTOEXTEND ON;  
 ```
 3. Turn off datafile old 
 ```
@@ -52,4 +56,35 @@ select USERNAME, DEFAULT_TABLESPACE, TEMPORARY_TABLESPACE
 	  from DBA_USERS
 	  where USERNAME = 'MRADIO';
 ```
-7.
+7. Show CHARACTER SET on database
+```
+SQL> select * from nls_database_parameters where parameter like '%SET%';
+
+PARAMETER
+------------------------------
+VALUE
+--------------------------------------------------------------------------------
+NLS_CHARACTERSET
+AL32UTF8
+
+NLS_NCHAR_CHARACTERSET
+AL16UTF16
+```
+8. Show job is running 
+```
+SQL> SELECT * FROM DBA_DATAPUMP_JOBS;
+
+OWNER_NAME                     JOB_NAME
+------------------------------ ------------------------------
+OPERATION
+--------------------------------------------------------------------------------
+JOB_MODE
+--------------------------------------------------------------------------------
+STATE                              DEGREE ATTACHED_SESSIONS DATAPUMP_SESSIONS
+------------------------------ ---------- ----------------- -----------------
+SYSTEM                         SYS_IMPORT_SCHEMA_01
+IMPORT
+SCHEMA
+EXECUTING                               1                 0                 2
+```
+9. 
