@@ -87,4 +87,82 @@ IMPORT
 SCHEMA
 EXECUTING                               1                 0                 2
 ```
-9. 
+9. Fix error ORA-12519: TNS:no appropriate service handler found
+```
+lsnrctl status
+
+LSNRCTL for Linux: Version 12.2.0.1.0 - Production on 28-NOV-2018 17:17:10
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=0.0.0.0)(PORT=1521)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+Start Date                28-NOV-2018 17:12:12
+Uptime                    0 days 0 hr. 4 min. 58 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /home/u01/app/oracle/product/12.2.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /home/u01/app/oracle/diag/tnslsnr/vt2-beta-oracle01/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcps)(HOST=vt2-beta-oracle01)(PORT=5500))(Security=(my_wallet_directory=/home/u01/app/oracle/product/12.2.0/dbhome_1/admin/orcl/xdb_wallet))(Presentation=HTTP)(Session=RAW))
+Services Summary...
+Service "orcl.viettalk.local" has 1 instance(s).
+  Instance "orcl", status READY, has 1 handler(s) for this service...
+Service "orclXDB.viettalk.local" has 1 instance(s).
+  Instance "orcl", status READY, has 1 handler(s) for this service...
+The command completed successfully
+```
+```
+Check log /home/u01/app/oracle/diag/tnslsnr/vt2-beta-oracle01/listener/alert/log.xml
+<msg time='2018-11-28T17:06:46.382+07:00' org_id='oracle' comp_id='tnslsnr'
+ type='UNKNOWN' level='16' host_id='vt2-beta-oracle01'
+ host_addr='10.84.86.38' pid='25030'>
+ <txt>TNS-12519: TNS:no appropriate service handler found
+ </txt>
+</msg>
+
+---> Restart lsnrctl
+[oracle@vt2-beta-oracle01 ~]$ lsnrctl stop
+[oracle@vt2-beta-oracle01 ~]$ lsnrctl start
+
+[oracle@vt2-beta-oracle01 ~]$ lsnrctl status
+
+LSNRCTL for Linux: Version 12.2.0.1.0 - Production on 28-NOV-2018 17:26:32
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=0.0.0.0)(PORT=1521)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+Start Date                28-NOV-2018 17:26:00
+Uptime                    0 days 0 hr. 0 min. 32 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /home/u01/app/oracle/product/12.2.0/dbhome_1/network/admin/listener.ora
+Listener Log File         /home/u01/app/oracle/diag/tnslsnr/vt2-beta-oracle01/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+The listener supports no services
+The command completed successfully
+
+
+Manual service registration
+SQL> ALTER SYSTEM REGISTER; 
+System altered.
+SQL> alter database register;
+ALTER SYSTEM REGISTER; 
+
+This command forces the registration of database information to the listener.
+referrent: http://www.dba-oracle.com/oracle_news/2005_4_28_use_alter_system_register_command.htm
+```
+10.
