@@ -1,6 +1,6 @@
 
 # --- * * * Install oracle 11G R2 11.2.0.3 Centos 7* * * ---
-
+```
 1. Download Oracle 11g R2 11.2.0.3:
 
 	cd /opt
@@ -217,7 +217,7 @@ From <https://community.oracle.com/thread/2189824>
 comment #$(MK_EMAGENT_NMECTL)
 add to       $(MK_EMAGENT_NMECTL) -lnnz11
 
-
+```
 
 
 
