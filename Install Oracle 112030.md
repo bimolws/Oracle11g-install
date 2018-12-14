@@ -217,6 +217,32 @@ From <https://community.oracle.com/thread/2189824>
 comment #$(MK_EMAGENT_NMECTL)
 add to       $(MK_EMAGENT_NMECTL) -lnnz11
 
+
+*** Create swap if not have swap ***
+...
+
+Check: 
+cat /proc/swaps 
+Filename                                Type            Size    Used    Priority
+[root@ac-ump db_1]#
+
+---> Creating and Using a Swap File
+Note
+Configuring a swap file on a btrfs file system is not supported.
+To create and use a swap file:
+Use the dd command to create a file of the required size (for example, one million one-kilobyte blocks):
+
+# dd if=/dev/zero of=/swapfile bs=1024 count=1000000
+Initialize the file as a swap file:
+
+# mkswap /swapfile
+Enable swapping to the swap file:
+
+# swapon /swapfile
+Add an entry to /etc/fstab for the swap file so that the system uses it following the next reboot:
+
+/swapfile       swap       swap       defaults       0 0
+
 ```
 
 
