@@ -1,5 +1,5 @@
-Install Oracle 11g in Linux 7.x Step by step by Le Anh
-
+#Install Oracle 11g in Linux 7.x Step by step
+```
 Step 1: download oracle 11g in oracle website
 http://www.oracle.com/technetwork/dat...
 p10404530_112030_Linux-x86-64_1of7.zip
@@ -193,3 +193,5 @@ CDRRAW =
 
 now, install ORACLE DATABSE using DBCA
 $dbca
+
+```
