@@ -165,4 +165,43 @@ ALTER SYSTEM REGISTER;
 This command forces the registration of database information to the listener.
 referrent: http://www.dba-oracle.com/oracle_news/2005_4_28_use_alter_system_register_command.htm
 ```
-10.
+10. show mode
+```
+SELECT open_mode FROM v$database;
+
+OPEN_MODE
+--------------------
+READ WRITE
+
+If the value is:
+'MOUNTED', your database is mounted.
+'READ WRITE', then you can assume it's been activated.
+'READ ONLY' then it might be opened for query in read only mode, but not activated.
+'READ ONLY WITH APPLY' when using active dataguard.
+
+```
+
+11. Export and import different oracle 
+
+```
+-- Before export we should show version oracle on source and target
+
+SQL> show parameter compatible;
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+compatible                           string      12.2.0
+noncdb_compatible                    boolean     FALSE
+-- If different version solution export here:
+Please set parameter Version=11.2 in export command and import the data without issue.
+
+Source Database(12.2.0.1.0):
+expdp schemas=wala directory=DUMP_DIR Version=11.2 dumpfile=wala20181227.dmp logfile=wala20181227.log 
+
+Target Database(11.2.0.3.0):
+impdp schemas=wala directory=dump_dir DUMPFILE=wala20181227.dmp LOGFILE=wala20181227.log
+
+ORA-39112: Dependent object type INDEX_STATISTICS skipped, base object type INDEX:"EWALLET"."TBL_PROMOTION_TRANSACTION_PK" creation failed
+--> Version Oracle --> Abort
+```
+12.

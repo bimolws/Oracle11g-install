@@ -30,7 +30,7 @@ Filesystem            Size  Used Avail Use% Mounted on
 tmpfs                  18G  7.6G   11G  43% /dev/shm
 /dev/cciss/c0d1p1     1.1T  719G  327G  69% /opt2
 
-[oracle@db opt2]$ expdp directory=dump2 dumpfile=databasename.dmp logfile=databasename.log full=y
+[oracle@db opt2]$ expdp schemas=ewallet directory=dump2 dumpfile=databasename.dmp logfile=databasename.log 
 
 Export: Release 11.2.0.1.0 - Production on Fri Nov 2 09:13:58 2018
 

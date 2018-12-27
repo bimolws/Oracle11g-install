@@ -121,3 +121,39 @@ PASSWORD_LOCK_TIME DEFAULT
 PASSWORD_GRACE_TIME DEFAULT
 PASSWORD_VERIFY_FUNCTION DEFAULT;
 ```
+
+6. Error incompatible version number 5.1
+
+```
+-- Before export we should show version oracle on source and target
+
+SQL> show parameter compatible;
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+compatible                           string      12.2.0
+noncdb_compatible                    boolean     FALSE
+--------------------- show error ------------------------------------
+impdp userid=system/Oracle123 schemas=wala directory=dump_dir Version=12.2 DUMPFILE=20181227wala.dmp LOGFILE=20181227wala.log
+
+Import: Release 11.2.0.3.0 - Production on Fri Dec 28 04:51:00 2018
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.3.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+ORA-39001: invalid argument value
+ORA-39000: bad dump file specification
+ORA-39142: incompatible version number 5.1 in dump file "/opt/export/20181227wala.dmp"
+--------------------- end show error ------------------------------------
+
+SOLUTION:
+
+Please set parameter Version=11.2 in export command and import the data without issue.
+
+Source Database(12.2.0.1.0):
+expdp schemas=wala directory=DUMP_DIR Version=11.2 dumpfile=wala20181227.dmp logfile=wala20181227.log 
+
+Target Database(11.2.0.3.0):
+impdp schemas=wala directory=dump_dir DUMPFILE=wala20181227.dmp LOGFILE=wala20181227.log
+```
