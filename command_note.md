@@ -204,4 +204,14 @@ impdp schemas=wala directory=dump_dir DUMPFILE=wala20181227.dmp LOGFILE=wala2018
 ORA-39112: Dependent object type INDEX_STATISTICS skipped, base object type INDEX:"EWALLET"."TBL_PROMOTION_TRANSACTION_PK" creation failed
 --> Version Oracle --> Abort
 ```
-12.
+12. Create read only user in Oracle
+```
+sqlplus / as sysdba
+SQL> create user user_name identified by password;
+SQL> grant create session to user_name;
+SQL> grant select any table to user_name;
+or > grant select on a.b to user_name;
+a: schemas b: table
+SQL> conn user_name/password
+```
+13. 
