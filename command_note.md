@@ -214,4 +214,23 @@ or > grant select on a.b to user_name;
 a: schemas b: table
 SQL> conn user_name/password
 ```
-13. 
+
+13. ORA-12519: TNS:no appropriate service handler found tips
+```
+ORA-12519: TNS:no appropriate service handler found tips
+
+i select the this query but how can i solve this problem.
+select * from v$resource_limit where resource_name = 'processes';
+
+
+RESOURCE_NAME CURRENT_UTILIZATION MAX_UTILIZATION LIMIT_VALUE
+------------- ------------------- --------------- -----------
+processes           148           150               150   
+i mean which value should i update.
+
+SQL>alter system set processes=300 scope=spfile;
+SQL>shut immediate;
+SQL>startup;
+```
+
+14.
