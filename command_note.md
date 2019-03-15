@@ -233,4 +233,7 @@ SQL>shut immediate;
 SQL>startup;
 ```
 
-14.
+14. Fix ORA-00333: redo log read error block 5056 count 7711
+```
+
+```
