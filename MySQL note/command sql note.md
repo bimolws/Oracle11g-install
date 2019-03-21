@@ -46,3 +46,5 @@ Finally, flush:
 flush privileges;
 ```
 GRANT ALL PRIVILEGES ON sunfrog.* TO 'nolove'@'%' IDENTIFIED BY 'password';
+
+Enable root remote to databaseGRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
