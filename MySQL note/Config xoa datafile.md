@@ -9,6 +9,7 @@
 #
 # include all files from the config directory
 #
+```
 !includedir /etc/my.cnf.d
 
 
@@ -63,3 +64,4 @@ innodb_file_per_table=1
 log-error               =/var/lib/mysql/logs/mysqld.log
 bind_address            = 0.0.0.0
 datadir                 = /var/lib/mysql
+```
