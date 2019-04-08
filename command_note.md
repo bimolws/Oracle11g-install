@@ -237,3 +237,16 @@ SQL>startup;
 ```
 
 ```
+
+15. Check connection Oracle 
+```
+The number of sessions the database was configured to allow
+
+SELECT name, value 
+  FROM v$parameter
+ WHERE name = 'sessions';
+The number of sessions currently active
+
+SELECT COUNT(*)
+  FROM v$session;
+```
