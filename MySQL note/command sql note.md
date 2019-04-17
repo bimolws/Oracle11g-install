@@ -48,3 +48,28 @@ flush privileges;
 GRANT ALL PRIVILEGES ON sunfrog.* TO 'nolove'@'%' IDENTIFIED BY 'password';
 
 Enable root remote to databaseGRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+* Export 100 rows from table mysql *
+```
+mysqldump -u root -p database_name table_name --where="1=1 order by id desc limit 100" > /opt/tbl_name.sql
+```
+# To export to file (data only)
+```
+mysqldump -u [user] -p[pass] --no-create-info mydb > mydb.sql
+```
+# To export to file (structure only)
+```
+mysqldump -u [user] -p[pass] --no-data mydb > mydb.sql
+```
+# To import to database
+```
+mysql -u [user] -p[pass] mydb < mydb.sql
+```
+#You can use the --ignore-table option. So you could do
+```
+mysqldump -u USERNAME -pPASSWORD DATABASE --ignore-table=DATABASE.table1 > database.sql
+```
+* Import database *
+```
+mysql -u username -p databasename < filename.sql
+```
