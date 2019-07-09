@@ -63,13 +63,9 @@ mysqldump -u [user] -p[pass] --no-data mydb > mydb.sql
 ```
 # To import to database
 ```
-mysql -u [user] -p[pass] mydb < mydb.sql
+mysql -u [user] -p[pass] databasename < filename.sql
 ```
 #You can use the --ignore-table option. So you could do
 ```
 mysqldump -u USERNAME -pPASSWORD DATABASE --ignore-table=DATABASE.table1 > database.sql
-```
-* Import database *
-```
-mysql -u username -p databasename < filename.sql
 ```
