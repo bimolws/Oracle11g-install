@@ -1,3 +1,24 @@
+
+---------------------------------Install mariadb on Centos 7---------------------------------
+vi /etc/yum.repos.d/MariaDB.repo
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.1/centos7-amd64
+gpgkey=http://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+yum install mariadb-server mariadb-client -y
+
+Sau khi đã cài đặt xong MariaDB-server. Chay mysql_secure_installation để đặt mật khẩu cho Root và loại bỏ một số nguy cơ bảo mật.
+mysql_secure_installation
+
+mkdir -p /var/lib/mysql/data/tablespace
+mkdir -p /var/lib/mysql/tmp
+mkdir -p /var/lib/mysql/logs/iblogs
+mkdir -p /var/lib/mysql/logs/binlog
+cd /var/lib && chown -R mysql.mysql mysql
+
+vi /etc/my.cnf
 [mysqld]
 datadir                 =/var/lib/mysql
 socket                  =/var/lib/mysql/mysql.sock

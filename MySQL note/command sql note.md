@@ -56,6 +56,9 @@ mysqldump -u root -p database_name table_name --where="1=1 order by id desc limi
 # To export to file (data only)
 ```
 mysqldump -u [user] -p[pass] --no-create-info mydb > mydb.sql
+
+# Case: Export data of only table
+mysqldump -uroot -p --no-create-db --no-create-info Campaign call_event > /opt/test.sql
 ```
 # To export to file (structure only)
 ```
